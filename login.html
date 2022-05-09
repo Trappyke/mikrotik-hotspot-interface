@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+<title>TRACERTECH | Login</title>
+<link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+<script>
+    var error = "$(error)";
+    if ((error == "user $(username) has reached uptime limit") || (error ==
+            "kode voucher/user $(username) sudah mencapai batas waktu")) {
+        window.location.href = "./expired.html";
+    }
+</script>
+</head>
+<body class="theme-light">
+<!-- <div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div> -->
+<div id="page">
+<div class="header header-fixed header-logo-center">
+<a href="login.html" class="header-title">  TRQCERTECH Wi-Fi</a>
+<a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark tablinks"><i class="fas fa-sun"></i></a>
+<a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light tablinks"><i class="fas fa-moon"></i></a>
+</div>
+<div id="footer-bar" class="footer-bar-6">
+<a href="payment.html"><i class="fa fa-layer-group"></i><span>Payment</span></a>
+<a href="voucher.html" ><i class="fa fa-shopping-cart"></i><span>Voucher</span></a>
+<a href="login.html" class="circle-nav active-nav"><i class="fa fa-home"></i><span>Home</span></a>
+<a href="outlet.html"><i class="fa fa-map-marker"></i><span>Outlet</span></a>
+<a href="info.html"><i class="fa fa-info"></i><span>Info</span></a>
+</div>
+<div class="page-content header-clear-medium">
+<div class="card card-style">
+<div class="content">
+
+
+<div class="row">
+
+<div class="col-1 pr-1 pl-1">
+</div>
+<div class="col-5 pr-1 pl-1">
+<a href="javascript:void(0);" onclick="openLogin(event, 'KV')" id="kodevoucher" class="btn btn-m btn-full mb-3 rounded-xs text-uppercase font-900 shadow-s bg-red-dark">Voucher</a>
+</div>
+
+<div class="col-5 pr-1 pl-1">
+<a href="javascript:void(0);" onclick="openLogin(event, 'UP')" id="userpass" class="btn btn-m btn-full mb-3 rounded-xs text-uppercase font-900 shadow-s bg-blue-dark">Member</a>
+</div>
+
+<div class="col-1 pr-1 pl-1">
+</div>
+
+</div>
+
+<!-- =========================================================================== -->
+
+<div id="KV" class="tabcontent">
+$(if chap-id)
+    <form name="sendinkv" action="$(link-login-only)" method="post" style="display:none">
+        <input type="hidden" name="username" />
+        <input type="hidden" name="password" />
+        <input type="hidden" name="dst" value="$(link-orig)" />
+        <input type="hidden" name="popup" value="true" />
+    </form>
+
+    <script src="/md5.js"></script>
+    <script>
+        function doLoginkv() {
+            document.sendinkv.username.value = document.loginkv.usernamekv.value;
+            document.sendinkv.password.value = hexMD5('$(chap-id)' + document.loginkv.usernamekv.value + '$(chap-challenge)');
+            document.sendinkv.submit();
+            return false;
+        }
+
+    </script>
+    $(endif)
+
+
+
+<h1 class="font-30" style="text-align: center;">Voucher</h1>
+<form name="loginkv" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLoginkv()" $(endif)>
+                    <input type="hidden" name="dst" value="$(link-orig)" />
+                    <input type="hidden" name="popup" value="true" />
+<div class="input-style has-icon input-style-1 input-required">
+<i class="input-icon fa fa-user"></i>
+<span>Voucher</span>
+<em>(required)</em>
+<input type="name" name="usernamekv" value="$(username)" placeholder="Voucher">
+</div>
+<br>
+<input type="submit" value="Login" style="width: 100%" class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s"/>
+
+
+
+
+
+
+ 
+<div class="row pt-3 mb-3">
+<div class="col-6 text-left">
+</div>
+
+</div>
+
+</form>
+</div>
+<!-- ========================================================= -->
+
+
+
+<div id="UP" class="tabcontent">
+$(if chap-id)
+    <form name="sendinup" action="$(link-login-only)" method="post" style="display:none">
+        <input type="hidden" name="username" />
+        <input type="hidden" name="password" />
+        <input type="hidden" name="dst" value="$(link-orig)" />
+        <input type="hidden" name="popup" value="true" />
+    </form>
+
+    <script src="/md5.js"></script>
+    <script>
+        function doLogin() {
+            document.sendinup.username.value = document.login.username.value;
+            document.sendinup.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+            document.sendinup.submit();
+            return false;
+        }
+
+    </script>
+    $(endif)
+
+
+
+<h1 class="font-30" style="text-align: center;">Member</h1>
+<form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+                    <input type="hidden" name="dst" value="$(link-orig)" />
+                    <input type="hidden" name="popup" value="true" />
+<div class="input-style has-icon input-style-1 input-required">
+<i class="input-icon fa fa-user"></i>
+<span>Username</span>
+<em>(required)</em>
+<input type="name" name="username" value="$(username)" placeholder="Username">
+</div>
+<div class="input-style has-icon input-style-1 input-required">
+<i class="input-icon fa fa-lock"></i>
+<span>Password</span>
+<em>(required)</em>
+<input type="password" name="password" placeholder="Password">
+</div>
+<input type="submit" value="login" style="width: 100%" class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s"/>
+
+
+<div class="row pt-3 mb-3">
+<div class="col-6 text-left">
+</div>
+
+</div>
+
+</form>
+</div>
+
+
+
+
+
+
+
+<!-- ======================================================================= -->
+
+
+
+
+
+
+$(if error)
+
+ <div class="ml-3 mr-3 mb-5 alert alert-small rounded-s shadow-xl bg-red-dark" role="alert">
+<span><i class="fa fa-times color-white"></i></span>
+<strong class="color-white">$(error)</strong>
+<button type="button" class="close color-white opacity-60 font-16" data-dismiss="alert" aria-label="Close">×</button>
+</div>
+  $(endif)
+
+
+</div>
+
+
+<div id="menu-main" class="menu menu-box-left rounded-0" data-menu-load="menu-main.html" data-menu-width="280" data-menu-active="nav-pages"></div>
+
+<div id="menu-share" class="menu menu-box-bottom rounded-m" data-menu-load="menu-share.html" data-menu-height="370"></div>
+
+<div id="menu-colors" class="menu menu-box-bottom rounded-m" data-menu-load="menu-colors.html" data-menu-height="480"></div>
+</div>
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script>
+function openLogin(evt, loginName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(loginName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("kodevoucher").click();
+</script>
+</body>

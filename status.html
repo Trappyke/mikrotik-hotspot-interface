@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+$(if refresh-timeout)
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
+<meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+$(endif)
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+<title>TRACERTECH | STATUS</title>
+<link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+<script type="text/javascript" src="data.js"></script>
+<script language="JavaScript">
+
+$(if advert-pending == 'yes')
+    var popup = '';
+    function focusAdvert() {
+    if (window.focus) popup.focus();
+    }
+    function openAdvert() {
+    popup = open('$(link-advert)', 'hotspot_advert', '');
+    setTimeout("focusAdvert()", 1000);
+    }
+$(endif)
+    function openLogout() {
+    if (window.name != 'hotspot_status') return true;
+        open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+    window.close();
+    return false;
+    }
+
+</script>
+</head>
+<body class="theme-light">
+<!-- <div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div> -->
+<div id="page">
+<div class="header header-fixed header-logo-center">
+<a href="login.html" class="header-title">TRACERTECH Wi-Fi</a>
+<a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
+<a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
+</div>
+<div id="footer-bar" class="footer-bar-6">
+<a href="payment.html" ><i class="fa fa-layer-group"></i><span>Payment</span></a>
+<a href="voucher.html" ><i class="fa fa-shopping-cart"></i><span>Voucher</span></a>
+<a href="login.html" class="circle-nav active-nav"><i class="fa fa-home"></i><span>Home</span></a>
+<a href="outlet.html" class="v"><i class="fa fa-map-marker"></i><span>Outlet</span></a>
+<a href="info.html"><i class="fa fa-info"></i><span>Info</span></a>
+</div>
+<div class="page-content header-clear-medium">
+<div class="card card-style">
+<div class="content">
+
+
+
+<center>
+$(if login-by == 'trial')
+<h2 class="major">Welcome</h2>
+      $(elif login-by != 'mac')
+<h2 class="major">Welcome</h2>
+        <div id="user" style="text-align: center; font-weight:bold; margin-top:10px;">$(username)</div> 
+      $(endif) 
+</center>
+
+
+
+
+<form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+
+<div class="list-group list-custom-small">
+
+<a href="#">
+<span>IP Address</span>
+<span class="badge bg-red-dark color-white font-10">$(ip) </span>
+</a>
+
+<a href="#">
+<span>MAC Address</span>
+<span class="badge bg-yellow-dark color-white font-10">$(mac) </span>
+</a>
+
+<a href="#">
+<span>Upload | Download</span>
+<span class="badge bg-blue-dark color-white font-10">$(bytes-in-nice) | $(bytes-out-nice) </span>
+</a>
+
+<a href="#">
+<span>Active</span>
+<span class="badge bg-green-dark color-white font-10">$(uptime) </span>
+</a>
+ $(if session-time-left)
+<a href="#">
+<span>Remaining time</span>
+<span class="badge bg-blue-dark color-white font-10">$(session-time-left) </span>
+</a>
+ $(endif)
+ $(if blocked == 'yes')
+<a href="#">
+<span>Status</span>
+<span class="badge bg-red-dark color-white font-10"><a href="$(link-advert)" target="hotspot_advert">advertisement</a> required</div> </span>
+</a>
+$(elif refresh-timeout)
+<a href="#">
+<span>Refresh</span>
+<span class="badge bg-red-dark color-white font-10">$(refresh-timeout) </span>
+</a>
+$(if session-time-left)
+
+$(endif)
+<a href="#">
+<span>Expired</span>
+<span class="badge bg-blue-dark color-white font-10"><iframe id="exp" style="width: 150px;height: 20px" frameborder="0" scrolling="no" src="about:blank"></iframe> </span>
+</a>
+$(if login-by-mac != 'yes')
+        <br>
+        <input type="submit" class="btn btn-full btn-l font-600 font-13 bg-red-dark mt-4 rounded-s" value=" Logout">
+        $(endif)
+
+
+</div>
+</div>
+
+
+</div>
+
+
+<div id="menu-main" class="menu menu-box-left rounded-0" data-menu-load="menu-main.html" data-menu-width="280" data-menu-active="nav-pages"></div>
+
+<div id="menu-share" class="menu menu-box-bottom rounded-m" data-menu-load="menu-share.html" data-menu-height="370"></div>
+
+<div id="menu-colors" class="menu menu-box-bottom rounded-m" data-menu-load="menu-colors.html" data-menu-height="480"></div>
+</div>
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript" >
+        //get validity
+        var usr = document.getElementById('user').innerHTML
+        var url = "http://example.com/status/status.php?name="; // http://ip-server-mikhmon/mikhmonv2/status/status.php?name=
+        var SessionName = "ai.ck"
+        var getvalid = url+usr+"&session="+SessionName
+        document.getElementById("exp").src = getvalid;
+    </script>
+</body>
